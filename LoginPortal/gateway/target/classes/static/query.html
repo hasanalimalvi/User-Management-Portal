@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Query User</h1>
+    <form id="queryForm">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName">
+        </div>
+        <div class="form-group">
+            <label for="profession">Profession</label>
+            <input type="text" class="form-control" id="profession" name="profession">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="searchUsers()">Search</button>
+    </form>
+</div>
+
+<script>
+    function searchUsers() {
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const profession = document.getElementById('profession').value;
+        window.location.href = `/queryUser.html?username=${username}&email=${email}&firstName=${firstName}&lastName=${lastName}&profession=${profession}`;
+    }
+</script>
+</body>
+</html>

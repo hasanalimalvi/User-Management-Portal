@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table-container {
+            max-height: 500px; /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+        thead, tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+        tbody {
+            display: block;
+        }
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="header-row mb-4">
+        <h1>Query Results</h1>
+        <div class="button-group">
+            <button type="button" class="btn btn-primary" onclick="redirectToMainPage()">Back to Main Page</button>
+            <button type="button" class="btn btn-secondary" onclick="redirectToHomePage()">Home</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table id="queryResultsTable" class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sr No.</th>
+                <th>Username</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="queryResultsBody">
+            <!-- Query results will be appended here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        const email = urlParams.get('email');
+        const firstName = urlParams.get('firstName');
+        const lastName = urlParams.get('lastName');
+        const profession = urlParams.get('profession');
+        searchUsers(username, email, firstName, lastName, profession);
+    });
+
+    function searchUsers(username, email, firstName, lastName, profession) {
+        fetch(`/userManagement/search?username=${username}&email=${email}&firstName=${firstName}&lastName=${lastName}&profession=${profession}`)
+            .then(response => response.json())
+            .then(users => {
+                const queryResultsBody = document.getElementById('queryResultsBody');
+                queryResultsBody.innerHTML = ''; // Clear previous results
+                users.forEach((user, index) => {
+                    const row = document.createElement('tr');
+                    const srNoCell = document.createElement('td');
+                    srNoCell.innerText = index + 1;
+                    const usernameCell = document.createElement('td');
+                    usernameCell.innerText = user.username;
+                    const actionCell = document.createElement('td');
+                    const viewButton = document.createElement('button');
+                    viewButton.innerText = 'View';
+                    viewButton.className = 'btn btn-primary';
+                    viewButton.onclick = function() {
+                        viewUserDetails(user.id);
+                    };
+                    actionCell.appendChild(viewButton);
+                    row.appendChild(srNoCell);
+                    row.appendChild(usernameCell);
+                    row.appendChild(actionCell);
+                    queryResultsBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching users:', error));
+    }
+
+    function viewUserDetails(userId) {
+        window.location.href = `/user.html?id=${userId}`;
+    }
+
+    function redirectToMainPage() {
+        window.location.href = "/userDetails.html";
+    }
+
+    function redirectToHomePage() {
+        window.location.href = "/index.html";
+    }
+</script>
+</body>
+</html>

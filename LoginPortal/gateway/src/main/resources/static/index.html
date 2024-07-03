@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-light">User Management</h1>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-primary" onclick="redirectToLogin()">Login</button>
+                <button class="btn btn-success ml-2" onclick="redirectToSignup()">Signup</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h2>Welcome to the User Management System</h2>
+            <p>Manage users effectively and efficiently.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function redirectToLogin() {
+        window.location.href = '/login.html'; // Change this URL to your login page
+    }
+
+    function redirectToSignup() {
+        window.location.href = '/signup.html'; // Change this URL to your signup page
+    }
+</script>
+</body>
+</html>
